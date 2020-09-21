@@ -3475,8 +3475,10 @@ void LayoutWriter::write_m(Block& block, std::ofstream& f_out, long double const
 	         "endif % flag_gui\n"
 	         "if flag_process\n"
 	         "t_process_start = clock();\n"
-	         "RunOpenEMS(path_simulation, Sim_CSX);\n"
-	         "t_process_stop = clock();\n"
+	         "Settings.SSH.host = 'openems-home';\n"
+             "Settings.SSH.bin = '/home/dom/opt/openEMS/bin/openEMS.sh';\n"
+             "RunOpenEMS(path_simulation,Sim_CSX,'',Settings)\n"
+ 	         "t_process_stop = clock();\n"
 	         "endif % flag_process\n"
 	         "\n";
 
