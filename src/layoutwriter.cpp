@@ -3354,12 +3354,13 @@ void LayoutWriter::write_m(Block& block, std::ofstream& f_out, long double const
 			}
 		}
 	f_out << "\t];\n"
-	         "endif % flag_conductingsheet\n";
+	         "endif % flag_conductingsheet\n"
+             "max_recursion_depth(1024);\n";
 
 //	f_out << "mesh.z = linspace(" << -substrate.h-copper.h << ", "copper.h", 4);\n";
 
 	f_out << "if flag_smoothmesh\n"
-	         "mesh = SmoothMesh(mesh, metal_res);\n"
+	         "mesh = SmoothMesh(mesh, metal_res,\"algorithm\",\"RecursiveSmoothMesh\");\n"
 	         "endif % flag_smoothmesh\n"
 	         "endif % flag_metalresmesh\n"
 	         "endif % flag_mesh\n"
@@ -3387,7 +3388,7 @@ void LayoutWriter::write_m(Block& block, std::ofstream& f_out, long double const
 
 
 	         "if flag_smoothmesh\n"
-	         "mesh = SmoothMesh(mesh, substrate_res);\n"
+	         "mesh = SmoothMesh(mesh, substrate_res,\"algorithm\",\"RecursiveSmoothMesh\");\n"
 	         "endif % flag_smoothmesh\n"
 	         "endif % flag_mesh\n"
 	         "\n"
